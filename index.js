@@ -2,7 +2,7 @@
 const express = require("express"),
       app = express(),
       port = process.env.PORT || 3535;
-
+      
 app.route("/200/*")
     .get((req, res) => {
         console.log(`200 GET to ${req.url}`)
@@ -31,6 +31,16 @@ app.route("/500/*")
     .post((req, res) => {
         console.log(`500 POST to ${req.url}`)
         res.send("500 I made a mistake").status(500)
+    });
+
+app.route("/*")
+    .get((req, res) => {
+        console.log(`200 GET to ${req.url}`)
+        res.send("OK").status(200)
+    })
+    .post((req, res) => {
+        console.log(`200 POST to ${req.url}`)
+        res.send("OK").status(200)
     });
 
 app.listen(port, () => {
