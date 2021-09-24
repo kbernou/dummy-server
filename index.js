@@ -1,6 +1,7 @@
 "use strict"
 const express = require("express"),
       app = express(),
+      fs = require("fs"),
       port = process.env.PORT || 3535;
       
 app.route("/200/*")
@@ -35,11 +36,17 @@ app.route("/500/*")
 
 app.route("/*")
     .get((req, res) => {
-        console.log(`200 GET to ${req.url}`)
+        let datetime = new Date()
+        fs.appendFile('requests.log', `[${datetime}] 200 GET to ${req.url}\n`, err => {
+           if (err) console.error("Shat the bed writing to file: " + err) 
+        });
         res.send("OK").status(200)
     })
     .post((req, res) => {
-        console.log(`200 POST to ${req.url}`)
+        let datetime = new Date()
+        fs.appendFile('requests.log', `[${datetime}]200 GET to ${req.url}\n`, err => {
+           if (err) console.error("Shat the bed writing to file: " + err) 
+        });
         res.send("OK").status(200)
     });
 
