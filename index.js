@@ -44,7 +44,7 @@ app.route("/*")
     })
     .post((req, res) => {
         let datetime = new Date()
-        fs.appendFile('requests.log', `[${datetime}]200 GET to ${req.url}\n`, err => {
+        fs.appendFile('requests.log', `[${datetime}]200 POST to ${req.url}\n`, err => {
            if (err) console.error("Shat the bed writing to file: " + err) 
         });
         res.send("OK").status(200)
